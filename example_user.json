@@ -1,6 +1,8 @@
 {
   "users": {
     "facebook_id": {
+      "first_name": "Peter",
+      "last_name": "Greggory",
       "income": 770.00,
       "balance": 5000.00,
       "investments": [
