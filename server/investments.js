@@ -1,3 +1,4 @@
+"use strict";
 
 module.exports = function(firebase){
   var db = firebase.database();
@@ -13,7 +14,7 @@ module.exports = function(firebase){
       markets.forEach((stock) => {
         if (stock.hasChild("change")) {
           var factor = (parseFloat(stock.child("change").val())*3.5) + 1;
-          promises.push(user.ref.child("investments/" + stock.key + "/value")
+          promises.push(user.ref.child("investments/" + stock.key + "/value").once("value")
             .then((investment) => {
               if (investment.val()) {
                 return investment.ref.set(parseFloat(investment.val())*factor);
@@ -27,9 +28,6 @@ module.exports = function(firebase){
     })
     .then(() => {
       return user.ref.once("value");
-    })
-    .catch((error)=> {
-      console.error(error);
     });
   };
 };
