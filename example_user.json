@@ -1,0 +1,22 @@
+{
+  "users": {
+    "facebook_id": {
+      "income": 770.00,
+      "balance": 5000.00,
+      "investments": [
+        {
+          "type": "AAPL",
+          "value": "519.42"
+        },
+        {
+          "type": "TSX",
+          "value": "400.00"
+        },
+        {
+          "type": "AMZN",
+          "value": "776.12"
+        },
+      ],
+    }
+  }
+}
