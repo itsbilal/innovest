@@ -9,6 +9,8 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
+  var provider = new firebase.auth.FacebookAuthProvider();
+
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -33,11 +35,11 @@ angular.module('starter.controllers', [])
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+    firebase.auth().signInWithPopup(provider)
+      .then(function(result) {
+        console.log(result);
+        $scope.modal.hide();
+      });
   };
 })
 
