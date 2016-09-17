@@ -47,12 +47,22 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
+  var db = firebase.database();
+  $scope.playlists;/* = [
     { title: 'Chequing', id: 1 },
     { title: 'Savings', id: 2 },
     { title: 'TFSA', id: 3 },
     { title: 'Bank Loan', id: 4 },
-  ];
+  ];*/
+  $scope.item;
+  $scope.getAccounts = function(){
+    var ref = db.ref("users/facebook_id/account_list");
+    ref.orderByChild("name").on("value", function(snapshot){
+        snapshot.forEach(function(data){
+            $scope.playlists[data.key] = data.val;
+        });
+    });
+  }
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
