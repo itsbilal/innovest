@@ -1,7 +1,10 @@
-<ion-view view-title="Playlists">
+<ion-view >
+<ion-nav-title>
+    <img height="40" src="img/innovest.png">
+</ion-nav-title>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
+      <ion-item ng-repeat="playlist in playlists" href="#/app/account-list/{{playlist.id}}">
         {{playlist.title}}
       </ion-item>
     </ion-list>

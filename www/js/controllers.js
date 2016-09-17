@@ -14,6 +14,9 @@ angular.module('starter.controllers', [])
   // Form data for the login modal
   $scope.loginData = {};
 
+  // Header image at the top of every page
+  $scope.logoTitle = "<img src=\"img/innovest.png\">";
+
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -45,12 +48,10 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+    { title: 'Chequing', id: 1 },
+    { title: 'Savings', id: 2 },
+    { title: 'TFSA', id: 3 },
+    { title: 'Bank Loan', id: 4 },
   ];
 })
 

@@ -17,6 +17,13 @@
           "value": "776.12"
         },
       ],
+      "account-list": [
+      {
+        "name": "Chequing",
+        "balance": 2400.00,
+        "balance_change": -300.00
+      }
+      ]
     }
   }
 }
