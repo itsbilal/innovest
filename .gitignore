@@ -7,3 +7,4 @@ plugins/
 /www/lib
 /www/css/ionic.app.css
 /www/css/ionic.app.min.css
+service_account_creds.json
