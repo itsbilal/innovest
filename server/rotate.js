@@ -1,3 +1,4 @@
+"use strict";
 
 var firebase = require("firebase");
 
@@ -48,6 +49,7 @@ investmentFiller.then(() => {
   })
   .then((users) => {
     console.log("Rotated successfully");
+    process.exit();
   })
   .catch((error) => {
     console.error(error);

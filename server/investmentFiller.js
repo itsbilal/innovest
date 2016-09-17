@@ -1,3 +1,4 @@
+"use strict";
 
 module.exports = function(firebase){
   var db = firebase.database();
@@ -27,6 +28,7 @@ module.exports = function(firebase){
       var results = {}
 
       for (let record of records) {
+        record[0] = record[0].replace(".","");
         results[record[0]] = {
           price: record[2]
         };
@@ -42,18 +44,15 @@ module.exports = function(firebase){
           } else {
             var promises = [];
             oldValues.forEach((stock) => {
-              difference = records[stock.key].price - stock.price;
+              var difference = records[stock.key].price - stock.child('price').val();
               promises.push(stock.ref.set({
                 price: records[stock.key].price,
-                change: (difference/stock.price)
+                change: (difference/stock.child('price').val())
               }));
             });
 
             return Promise.all(promises);
           }
         });
-    })
-    .catch((error)=> {
-      console.error(error);
     });
 };
