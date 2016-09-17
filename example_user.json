@@ -5,20 +5,11 @@
       "last_name": "Greggory",
       "income": 770.00,
       "balance": 5000.00,
-      "investments": [
-        {
-          "type": "AAPL",
-          "value": "519.42"
-        },
-        {
-          "type": "TSX",
-          "value": "400.00"
-        },
-        {
-          "type": "AMZN",
-          "value": "776.12"
-        },
-      ],
+      "investments": {
+        "AAPL": {
+          "value": 519.00
+        }
+      },
       "account-list": [
       {
         "name": "Chequing",

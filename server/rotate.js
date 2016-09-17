@@ -20,9 +20,17 @@ var incomeRotator = function(user) {
     });
 };
 
-var rotators = [incomeRotator];
+var investmentFiller = require("./investmentFiller")(firebase);
+var investmentRotator = require("./investments")(firebase);
 
-db.ref("/users/").once("value")
+var rotators = [
+  incomeRotator,
+  investmentRotator,
+  ];
+
+investmentFiller.then(() => {
+    return db.ref("/users/").once("value");
+  })
   .then((users) => {
     var userPromises = [];
     users.forEach((user) => {
