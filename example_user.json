@@ -1,8 +1,7 @@
 {
   "users": {
     "facebook_id": {
-      "first_name": "Peter",
-      "last_name": "Greggory",
+      "display_name": "Gregory",
       "income": 770.00,
       "balance": 5000.00,
       "investments": {
@@ -10,13 +9,17 @@
           "value": 519.00
         }
       },
-      "account-list": [
-      {
-        "name": "Chequing",
-        "balance": 2400.00,
-        "balance_change": -300.00
+      "account_list": 
+      {      
+        "chequing":{
+          "balance": 2400.00,
+          "balance_change": -300.00
+        },
+        "TFSA":{
+          "balance": 130.00,
+          "balance_change": 25.00
+        }
       }
-      ]
     }
   }
 }

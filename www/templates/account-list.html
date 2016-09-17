@@ -4,8 +4,8 @@
 </ion-nav-title>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" ng-click="item = playlist" href="#/app/account-list/{{playlist.id}}">
-        {{playlist.name}}
+      <ion-item ng-repeat="playlist in playlists" ng-click="selectedAccount = playlist" href="#/app/account-list/{{playlist}}">
+        {{playlist}}
       </ion-item>
     </ion-list>
   </ion-content>
