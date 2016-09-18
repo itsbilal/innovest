@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
 
     firebase.auth().signInWithPopup(provider)
       .then(function(result) {
-        $scope.uid = result.user.uid;
+        console.log(result);
         $scope.modal.hide();
       });
   };
@@ -54,12 +54,12 @@ angular.module('starter.controllers', [])
     { title: 'TFSA', id: 3 },
     { title: 'Bank Loan', id: 4 },
   ];*/
-  $scope.selectedAccount;
-  var getAccounts = function(){
-    var ref = db.ref("users/" + $scope.uid + "/account_list");
+  $scope.item;
+  $scope.getAccounts = function(){
+    var ref = db.ref("users/facebook_id/account_list");
     ref.orderByChild("name").on("value", function(snapshot){
         snapshot.forEach(function(data){
-            $scope.playlists[data.key] = data.val();
+            $scope.playlists[data.key] = data.val;
         });
     });
   }
@@ -67,3 +67,12 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });
+
+.controller('UserInfo',function($scope) {
+  var db = firebase.database();
+  db.ref("users/"+$scope.uid+"/display_name").on("value").then(function(name){
+    $scope.display_name = name.val();
+  })
+
+
+})
