@@ -14,6 +14,8 @@ angular.module('starter.controllers', [])
   // Form data for the login modal
   $scope.loginData = {};
 
+  $scope.selectedAccount = null;
+  
   // Header image at the top of every page
   $scope.logoTitle = "<img src=\"img/innovest.png\">";
 
@@ -48,22 +50,24 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistsCtrl', function($scope) {
   var db = firebase.database();
-  $scope.playlists;/* = [
+  $scope.accounts = [];/* = [
     { title: 'Chequing', id: 1 },
     { title: 'Savings', id: 2 },
     { title: 'TFSA', id: 3 },
     { title: 'Bank Loan', id: 4 },
   ];*/
-  $scope.selectedAccount;
   var getAccounts = function(){
     var ref = db.ref("users/" + $scope.uid + "/account_list");
     ref.orderByChild("name").on("value", function(snapshot){
-        snapshot.forEach(function(data){
-            $scope.playlists[data.key] = data.val();
-        });
+      snapshot.forEach(function(data){
+        var account = data.val();
+        account.name = data.key
+        $scope.accounts.push(account);
+      });
     });
   }
-  getAccounts();
+  
+  $scope.$watch('uid', getAccounts, true);
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
