@@ -42,7 +42,7 @@ angular.module('starter.controllers', [])
   $scope.performTransfer = function(){
       $scope.selectedAccount.balance = $scope.selectedAccount.balance + $scope.transferValue;
       $scope.selectedAccount.balance_change = $scope.selectedAccount.balance_change + $scope.transferValue;
-      console.log($scope.selectedAccount.balance);
+      $scope.saveUser();
   };
 
   var bootstrapUser = function(user) {
