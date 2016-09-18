@@ -25,7 +25,7 @@ angular.module('starter.controllers', [])
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
-  });
+  }); 
 
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
@@ -108,6 +108,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+  
 })
 
 .controller('DashboardCtrl',function($scope) {
