@@ -37,6 +37,14 @@ angular.module('starter.controllers', [])
     $scope.modal.show();
   };
 
+  $scope.transferValue = 0;
+
+  $scope.performTransfer = function(){
+      $scope.selectedAccount.balance = $scope.selectedAccount.balance + $scope.transferValue;
+      $scope.selectedAccount.balance_change = $scope.selectedAccount.balance_change + $scope.transferValue;
+      console.log($scope.selectedAccount.balance);
+  };
+
   var bootstrapUser = function(user) {
     var db = firebase.database();
 

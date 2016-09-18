@@ -5,7 +5,7 @@
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="account in accounts" ng-click="$parent.$parent.$parent.$parent.$parent.selectedAccount = account;">
-        {{account.name}}
+        {{account.name}}: {{account.balance}}
       </ion-item>
     </ion-list>
   </ion-content>
