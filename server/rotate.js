@@ -13,7 +13,8 @@ var db = firebase.database();
 
 var incomeRotator = function(user) {
   var income = parseFloat(user.child("income").val());
-  var balance = parseFloat(user.child("balance").val()) + income;
+  var expenses = parseFloat(user.child("expenses").val()) || 0;
+  var balance = parseFloat(user.child("balance").val()) + income - expenses;
 
   return user.ref.child("balance").set(balance)
     .then((result) => {
