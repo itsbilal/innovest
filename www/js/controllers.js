@@ -42,13 +42,13 @@ angular.module('starter.controllers', [])
 
     firebase.auth().signInWithPopup(provider)
       .then(function(result) {
-        console.log(result);
+        $scope.uid = result.user.uid;
         $scope.modal.hide();
       });
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
+.controller('AccountsCtrl', function($scope) {
   var db = firebase.database();
   $scope.accounts = [];/* = [
     { title: 'Chequing', id: 1 },
@@ -68,7 +68,7 @@ angular.module('starter.controllers', [])
     });
   }
   
-  $scope.$watch('uid', getAccounts, true);
+  $scope.$watch('uid', getAccounts);
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {

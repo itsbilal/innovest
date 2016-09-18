@@ -48,12 +48,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-    .state('app.playlists', {
+    .state('app.accounts', {
       url: '/account-list',
       views: {
         'menuContent': {
           templateUrl: 'templates/account-list.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'AccountsCtrl'
         }
       }
     })
