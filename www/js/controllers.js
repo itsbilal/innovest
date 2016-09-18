@@ -63,6 +63,7 @@ angular.module('starter.controllers', [])
         });
     });
   }
+  getAccounts();
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
