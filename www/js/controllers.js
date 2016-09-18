@@ -15,6 +15,7 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
 
   $scope.selectedAccount = null;
+  $scope.accounts = [];
   
   // Header image at the top of every page
   $scope.logoTitle = "<img src=\"img/innovest.png\">";
@@ -36,12 +37,59 @@ angular.module('starter.controllers', [])
     $scope.modal.show();
   };
 
+  var bootstrapUser = function(user) {
+    var db = firebase.database();
+
+    var default_user = {
+      "income": 770.00,
+      "balance": 5000.00,
+      "investments": {
+        "AAPL": {
+          "value": 519.00
+        }
+      },
+      "account_list": {      
+        "chequing":{
+          "balance": 2400.00,
+          "balance_change": -300.00
+        },
+        "TFSA":{
+          "balance": 130.00,
+          "balance_change": 25.00
+        }
+      }
+    };
+
+    db.ref("/users/" + user.uid).on("value", function(userSnapshot) {
+      var account_list = [];
+      if (userSnapshot.hasChildren()) {
+        $scope.user = userSnapshot.val();
+        delete $scope.user['account_list'];
+
+        account_list = userSnapshot.child("account_list");
+      } else {
+        default_user.display_name = user.displayName;
+        userSnapshot.ref.set(default_user);
+        account_list = default_user.account_list;
+      }
+
+      account_list.forEach(function(accountSnapshot){
+        var account = accountSnapshot.val();
+        account.name = accountSnapshot.key
+        $scope.accounts.push(account);
+      });
+
+      $scope.$apply();
+    });
+  };
+
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
 
     firebase.auth().signInWithPopup(provider)
       .then(function(result) {
+        bootstrapUser(result.user);
         $scope.uid = result.user.uid;
         $scope.modal.hide();
       });
@@ -50,25 +98,25 @@ angular.module('starter.controllers', [])
 
 .controller('AccountsCtrl', function($scope) {
   var db = firebase.database();
-  $scope.accounts = [];/* = [
-    { title: 'Chequing', id: 1 },
-    { title: 'Savings', id: 2 },
-    { title: 'TFSA', id: 3 },
-    { title: 'Bank Loan', id: 4 },
-  ];*/
-  var getAccounts = function(){
-    var ref = db.ref("users/" + $scope.uid + "/account_list");
-    ref.orderByChild("name").on("value", function(snapshot){
-      snapshot.forEach(function(data){
-        var account = data.val();
-        account.name = data.key
-        $scope.accounts.push(account);
-        $scope.$apply();
-      });
-    });
-  }
+  // /* = [
+  //   { title: 'Chequing', id: 1 },
+  //   { title: 'Savings', id: 2 },
+  //   { title: 'TFSA', id: 3 },
+  //   { title: 'Bank Loan', id: 4 },
+  // ];*/
+  // var getAccounts = function(){
+  //   var ref = db.ref("users/" + $scope.uid + "/account_list");
+  //   ref.orderByChild("name").on("value", function(snapshot){
+  //     snapshot.forEach(function(data){
+  //       var account = data.val();
+  //       account.name = data.key
+  //       $scope.accounts.push(account);
+  //       $scope.$apply();
+  //     });
+  //   });
+  // }
   
-  $scope.$watch('uid', getAccounts);
+  // $scope.$watch('uid', getAccounts);
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
