@@ -175,7 +175,7 @@ angular.module('starter.controllers', [])
 
   $scope.purchase = function() {
     $scope.$parent.user.expenses += $scope.weekly_payment;
-    $scope.$parent.user.balance -= $scope.price;
+    $scope.$parent.accounts[0].balance -= $scope.price;
     $scope.$parent.user.propertyValue = ($scope.$parent.user.propertyValue || 0) + $scope.price;
 
     $scope.$parent.saveUser();
