@@ -13,7 +13,8 @@ var db = firebase.database();
 
 var incomeRotator = function(user) {
   var income = parseFloat(user.child("income").val());
-  var balance = parseFloat(user.child("balance").val()) + income;
+  var expenses = parseFloat(user.child("expenses").val()) || 0;
+  var balance = parseFloat(user.child("balance").val()) + income - expenses;
 
   return user.ref.child("balance").set(balance)
     .then((result) => {
@@ -21,12 +22,30 @@ var incomeRotator = function(user) {
     });
 };
 
+var realEstateRotator = function(user) {
+  var propertyValue = parseFloat(user.child("propertyValue").val()) || 0.0;
+  var balance = parseFloat(user.child("balance").val());
+  balance -= propertyValue;
+
+  propertyValue = propertyValue * 1.02;
+  balance += propertyValue;
+
+  return user.ref.child("balance").set(balance)
+    .then((result)=> {
+      return user.ref.child("propertyValue").set(propertyValue);
+    })
+    .then((result)=> {
+      return user.ref.once("value");
+    });
+}
+
 var investmentFiller = require("./investmentFiller")(firebase);
 var investmentRotator = require("./investments")(firebase);
 
 var rotators = [
   incomeRotator,
   investmentRotator,
+  realEstateRotator,
   ];
 
 investmentFiller.then(() => {

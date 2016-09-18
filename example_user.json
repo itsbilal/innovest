@@ -2,7 +2,8 @@
   "users": {
     "facebook_id": {
       "display_name": "Gregory",
-      "income": 770.00,
+      "income": 800.00,
+      "expenses": 200.00,
       "balance": 5000.00,
       "investments": {
         "AAPL": {

@@ -1,0 +1,35 @@
+<ion-view>
+
+  <ion-nav-title>
+      <img height="40" src="img/innovest.png">
+  </ion-nav-title>
+
+  <ion-content>
+    <h1>Real Estate</h1>
+
+
+    <!--
+    List of houses
+      - Purchasing a house:
+      - Button leads to mortgage
+    Link to historic housing prices
+    list icons on left, list buttons on right with purchase button-->
+
+    <div>
+      <p><strong>Price:</strong>{{price}}</p>
+    </div>
+
+    <div>
+      Are you sure you wish to purchase it? Your cash balance is ${{cash_balance}}, and the down payment will be {{minimum_balance_needed}}.
+      <br>
+      Term: 25 years
+      <br>
+      Weekly payment: {{weekly_payment}}
+      <br>
+      <button class="button button-positive" ng-click="purchase()">Purchase</button>
+    </div>
+    <div ng-if="!can_purchase">
+      You cannot purchase this property; your cash balance of {{cash_balance}} is not high enough to pay the 5% down-payment.
+    </div>
+   </ion-content>
+</ion-view>

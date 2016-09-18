@@ -3,7 +3,45 @@
     <img height="40" src="img/innovest.png">
 </ion-nav-title>
   <ion-content>
-    <h1>{{selectedAccount.name}}</h1>
-    <h2>{{selectedAccount.balance}}</h2>
+    <div class="list card">
+
+      <div class="item item-avatar">
+        <img src="img/dollar_icon.ico">
+        <h2>{{selectedAccount.name}}</h2>
+        <p>September 18, 2016</p>
+      </div>
+
+      <div class="item item-body">
+        <!--<img class="full-image" src="delorean.jpg">-->
+        <p><h2>
+          Current Account Balance: ${{selectedAccount.balance}}
+          </h2>
+        </p>
+        <p><h2>
+            Weekly Balance Change: ${{selectedAccount.balance_change}}
+        </h2></p>
+        <p>
+            <!--<label class="item item-input item-select">-->
+            <div class="input-label">
+                Select Account
+            </div>
+                <select>
+                <option>Chequing</option>
+                <option selected>TFSA</option>
+                <option>Saving</option>
+                </select>
+            </label>
+            <label class="item item-input">
+            <input type="number" ng-model ="$parent.$parent.$parent.transferValue" placeholder="Enter Amount">
+            </label>
+            <button ng-click="$parent.$parent.$parent.performTransfer()", class="button button-positive">
+              Pay Balance
+            </button>
+          <!--<a href="#" class="subdued">1 Like</a>
+          <a href="#" class="subdued">5 Comments</a>-->
+        </p>
+      </div>
+
+</div>
   </ion-content>
 </ion-view>
