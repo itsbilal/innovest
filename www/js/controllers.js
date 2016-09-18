@@ -42,7 +42,7 @@ angular.module('starter.controllers', [])
 
     firebase.auth().signInWithPopup(provider)
       .then(function(result) {
-        $scope.uid = result.user.uid;
+        console.log(result);
         $scope.modal.hide();
       });
   };
@@ -72,3 +72,12 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });
+
+.controller('UserInfo',function($scope) {
+  var db = firebase.database();
+  db.ref("users/"+$scope.uid+"/display_name").on("value").then(function(name){
+    $scope.display_name = name.val();
+  })
+
+
+})
