@@ -83,6 +83,11 @@ angular.module('starter.controllers', [])
     });
   };
 
+  if (localStorage.getItem('uid')) {
+    $scope.uid = localStorage.getItem('uid');
+    bootstrapUser({uid: localStorage.getItem('uid')});
+  }
+
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
@@ -91,7 +96,10 @@ angular.module('starter.controllers', [])
       .then(function(result) {
         bootstrapUser(result.user);
         $scope.uid = result.user.uid;
+        localStorage.setItem('uid', $scope.uid);
         $scope.modal.hide();
+
+        $scope.$apply();
       });
   };
 
