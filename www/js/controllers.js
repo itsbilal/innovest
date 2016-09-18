@@ -16,7 +16,7 @@ angular.module('starter.controllers', [])
 
   $scope.selectedAccount = null;
   $scope.accounts = [];
-  
+
   // Header image at the top of every page
   $scope.logoTitle = "<img src=\"img/innovest.png\">";
 
@@ -97,31 +97,13 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AccountsCtrl', function($scope) {
-  var db = firebase.database();
-  // /* = [
-  //   { title: 'Chequing', id: 1 },
-  //   { title: 'Savings', id: 2 },
-  //   { title: 'TFSA', id: 3 },
-  //   { title: 'Bank Loan', id: 4 },
-  // ];*/
-  // var getAccounts = function(){
-  //   var ref = db.ref("users/" + $scope.uid + "/account_list");
-  //   ref.orderByChild("name").on("value", function(snapshot){
-  //     snapshot.forEach(function(data){
-  //       var account = data.val();
-  //       account.name = data.key
-  //       $scope.accounts.push(account);
-  //       $scope.$apply();
-  //     });
-  //   });
-  // }
   
-  // $scope.$watch('uid', getAccounts);
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('UserInfo',function($scope) {
+
+.controller('DashboardCtrl',function($scope) {
   var db = firebase.database();
   db.ref("users/"+$scope.uid+"/display_name").on("value").then(function(name){
     $scope.display_name = name.val();
