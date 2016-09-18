@@ -63,6 +63,7 @@ angular.module('starter.controllers', [])
         var account = data.val();
         account.name = data.key
         $scope.accounts.push(account);
+        $scope.$apply();
       });
     });
   }
@@ -71,8 +72,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
-});
-
+})
 .controller('UserInfo',function($scope) {
   var db = firebase.database();
   db.ref("users/"+$scope.uid+"/display_name").on("value").then(function(name){
