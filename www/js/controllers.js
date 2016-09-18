@@ -43,6 +43,7 @@ angular.module('starter.controllers', [])
     var default_user = {
       "income": 770.00,
       "balance": 5000.00,
+      "expenses": 200.00,
       "investments": {
         "AAPL": {
           "value": 519.00
@@ -103,10 +104,36 @@ angular.module('starter.controllers', [])
       });
   };
 
+  $scope.saveUser = function() {
+    if ($scope.uid) {
+      var db = firebase.database();
+
+      var account_list = {};
+      
+      $scope.accounts.forEach(function(account) {
+        account_list[account.name] = account;
+      });
+
+      $scope.user.account_list = account_list;
+
+      db.ref('/users/' + $scope.uid).set($scope.user);
+    }
+  }
+
   $scope.$watch('selectedAccount', function(){
     if ($scope.selectedAccount) {
       // Changed to a non-null value
-      $state.go('app.single', $scope.selectedAccount.name);
+      $state.go('app.single', {playlistId: $scope.selectedAccount.name});
+    }
+  }, true);
+
+  $scope.$watch('accounts', function(){
+
+    if ($scope.accounts.length > 0) {
+      $scope.cash_balance = 0;
+      $scope.accounts.forEach(function(account) {
+        $scope.cash_balance += parseFloat(account.balance);
+      });
     }
   }, true);
 })
@@ -123,4 +150,28 @@ angular.module('starter.controllers', [])
 
 
 
+})
+
+.controller('RealEstateListCtrl', function($scope, $state) {
+  $scope.buyHouse = function(price){
+    $state.go('app.buy', {price: price});
+  }
+})
+
+.controller('RealEstatePurchaseCtrl', function($scope, $stateParams, $state) {
+  $scope.price = parseFloat($stateParams.price);
+  $scope.minimum_balance_needed = 0.05*$scope.price;
+  $scope.can_purchase = $scope.minimum_balance_needed <= $scope.cash_balance;
+  $scope.loaned_amount = $scope.price - ($scope.cash_balance);
+  $scope.weekly_payment = (0.05122*$scope.loaned_amount)/52;
+
+  $scope.purchase = function() {
+    $scope.$parent.user.expenses += $scope.weekly_payment;
+    $scope.$parent.user.balance -= $scope.price;
+    $scope.$parent.user.propertyValue = ($scope.$parent.user.propertyValue || 0) + $scope.price;
+
+    $scope.$parent.saveUser();
+
+    $state.go('app.dashboard');
+  };
 })

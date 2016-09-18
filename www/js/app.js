@@ -35,7 +35,18 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/search',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/search.html',
+        controller: 'RealEstateListCtrl'
+      }
+    }
+  })
+
+  .state('app.buy', {
+    url: '/buy/:price',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/buy.html',
+        controller: 'RealEstatePurchaseCtrl'
       }
     }
   })
