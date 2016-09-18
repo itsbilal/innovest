@@ -59,6 +59,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
+
+
   .state('app.single', {
     url: '/account-list/:playlistId',
     views: {
