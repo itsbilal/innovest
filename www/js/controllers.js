@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -94,6 +94,13 @@ angular.module('starter.controllers', [])
         $scope.modal.hide();
       });
   };
+
+  $scope.$watch('selectedAccount', function(){
+    if ($scope.selectedAccount) {
+      // Changed to a non-null value
+      $state.go('app.single', $scope.selectedAccount.name);
+    }
+  }, true);
 })
 
 .controller('AccountsCtrl', function($scope) {
@@ -104,10 +111,5 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DashboardCtrl',function($scope) {
-  var db = firebase.database();
-  db.ref("users/"+$scope.uid+"/display_name").on("value").then(function(name){
-    $scope.display_name = name.val();
-  })
-
 
 })
