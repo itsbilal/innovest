@@ -65,10 +65,21 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: 'templates/markets.html',
+        controller: 'MarketsCtrl'
+      }
+    }
+  })
+
+  .state('app.market', {
+    url: '/market/:ticker',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/market.html',
         controller: 'MarketCtrl'
       }
     }
   })
+
 
   .state('app.single', {
     url: '/account-list/:playlistId',

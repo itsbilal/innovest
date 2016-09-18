@@ -121,6 +121,46 @@ angular.module('starter.controllers', [])
 
 .controller('DashboardCtrl',function($scope) {
 
+})
 
+.controller('MarketsCtrl',function($scope,$http, $state) {
+  $scope.stocks = ["AAPL","GOOG","AMZN","MSFT","^GSPC","^GSPTSE","XGB"];
+  $scope.selectedStock = null; 
+  $scope.$watch("selectedStock",function() {
+    if ($scope.selectedStock) {
+      $state.go('app.market', {ticker: $scope.selectedStock});
+    }
+  })
 
 })
+
+
+.controller('MarketCtrl', function($scope,$http, $stateParams) {
+  $scope.ticker = $stateParams.ticker;
+  $scope.filename = $scope.ticker.toLowerCase().replace('^','') + ".json";
+
+  $http.get('/lib/historical/' + $scope.filename).then(function(result){
+    var closing = [];
+    var dates = [];
+    forEach(function(data){
+      dates.push(data.Date);
+      closing.push(data.Close);
+
+    closing
+
+
+
+    })
+
+
+
+
+
+
+
+
+    })
+  });
+
+})
+

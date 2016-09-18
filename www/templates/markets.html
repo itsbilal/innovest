@@ -3,10 +3,8 @@
     <img height="40" src="img/innovest.png">
 </ion-nav-title>
   <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="account in accounts" ng-click="$parent.$parent.$parent.$parent.$parent.selectedAccount = account;">
-        {{account.name}}
-      </ion-item>
-    </ion-list>
+  	<ion-list>
+	  <ion-radio ng-repeat="stock in stocks" ng-click="$parent.selectedStock = stock">{{stock}}</ion-radio>
+	</ion-list>
   </ion-content>
 </ion-view>
