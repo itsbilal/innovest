@@ -84,7 +84,7 @@ angular.module('starter.controllers', [])
 
       account_list.forEach(function(accountSnapshot){
         var account = accountSnapshot.val();
-        account.name = accountSnapshot.key
+        account.name = accountSnapshot.key;
         $scope.accounts.push(account);
       });
 
