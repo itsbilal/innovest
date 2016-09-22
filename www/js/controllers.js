@@ -181,7 +181,6 @@ angular.module('starter.controllers', [])
       dates.push(data.Date);
       closing.push(data.Close);
 
-    closing
 
 
 
